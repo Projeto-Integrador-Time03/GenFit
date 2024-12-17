@@ -26,11 +26,11 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(message = "O Atributo Nome é Obrigatório!")
+	@NotBlank(message = "O Atributo Nome é Obrigatório!")
 	private String nome;
 
 	@Schema(example = "email@email.com.br")
-	@NotNull(message = "O Atributo Usuário é Obrigatório!")
+	@NotBlank(message = "O Atributo Usuário é Obrigatório!")
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
 	private String usuario;
 
@@ -41,8 +41,10 @@ public class Usuario {
 	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
 	private String foto;
 
+	@NotNull(message = "O Atributo Altura é Obrigatório!")
 	private float altura;
 
+	@NotNull(message = "O Atributo Peso é Obrigatório!")
 	private float peso;
 
 	/*
