@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.gen.genFit.model.Exercicio;
 import com.gen.genFit.repository.ExercicioRepository;
+
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 
@@ -38,6 +39,11 @@ public class ExercicioController {
 		return exercicioRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
+	
+	@GetMapping("/exercicio/{exercicio}")
+	public ResponseEntity<List<Exercicio>> getByExercicio(@PathVariable String exercicio){
+		return ResponseEntity.ok(exercicioRepository.findAllByExercicioContainingIgnoreCase(exercicio));
+	}
 
 	@PostMapping
 	public ResponseEntity<Exercicio> post(@Valid @RequestBody Exercicio exercicio) {
@@ -54,9 +60,9 @@ public class ExercicioController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		Optional<Exercicio> categoria = exercicioRepository.findById(id);
+		Optional<Exercicio> exercicio = exercicioRepository.findById(id);
 
-		if (categoria.isEmpty())
+		if (exercicio.isEmpty())
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
 		exercicioRepository.deleteById(id);
