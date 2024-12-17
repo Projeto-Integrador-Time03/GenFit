@@ -1,5 +1,6 @@
 package com.gen.genFit.service;
 
+import java.text.DecimalFormat;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,27 +105,30 @@ public class UsuarioService {
 		String mensagem;
 
 		if (usuario != null) {
+			
 			float altura = usuario.getAltura();
 			float peso = usuario.getPeso();
-
+			DecimalFormat df = new DecimalFormat("#.##");
+			
 			float imc = ((peso) / (altura * altura));
+			
+			
+			mensagem = ("O IMC de " + usuario.getNome() + " é: " + df.format(imc) + "\n" + usuario.getNome() + " está com");
 
-			mensagem = ("O IMC do(a) " + usuario.getNome() + " é de : " + imc);
-
-			if (imc > 15.5) {
-				mensagem = mensagem + ("\nA pessoa está com o peso abaixo do normal");
-			} else if (imc > 18.5 && imc < 24.9) {
-				mensagem = mensagem + ("\nA pessoa está com o peso normal");
+			if (imc > 15.5 && imc < 18.5) {
+				mensagem = mensagem + (" o peso abaixo do normal");
+			} else if (imc < 24.9) {
+				mensagem = mensagem + (" o peso normal");
 			} else if (imc < 29.9) {
-				mensagem = mensagem + ("\nA pessoa está com sobrepeso");
+				mensagem = mensagem + (" sobrepeso");
 			} else if (imc < 34.0) {
-				mensagem = mensagem + ("\nA pessoa está com obsedidade tipo 1");
+				mensagem = mensagem + (" obsedidade tipo 1");
 			} else if (imc < 39.9) {
-				mensagem = mensagem + ("\nA pessoa está com obsedidade tipo 2");
+				mensagem = mensagem + (" obsedidade tipo 2");
 			} else if (imc < 49.9) {
-				mensagem = mensagem + ("\nA pessoa está com obsedidade tipo 3");
+				mensagem = mensagem + (" obsedidade tipo 3");
 			} else {
-				mensagem = mensagem + ("\nA pessoa está com obsedidade tipo 4");
+				mensagem = mensagem + (" obsedidade tipo 4");
 			}
 		} else {
 			mensagem = "Usuário não encontrado";

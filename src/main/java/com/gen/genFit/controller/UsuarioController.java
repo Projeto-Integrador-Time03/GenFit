@@ -52,6 +52,12 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarioRepository.findByNomeContainingIgnoreCase(nome));
 	}
 	
+	@GetMapping("/calcular-imc/{id}")
+	public ResponseEntity<String> calcularIMC(@PathVariable Long id) {
+		return usuarioRepository.findById(id)
+				.map(usuario -> ResponseEntity.ok(usuarioService.calculoIMC(usuario)))
+				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado"));
+	}
 	
 	@PostMapping("/logar")
 	public ResponseEntity<UsuarioLogin> autenticarUsuario(@RequestBody Optional<UsuarioLogin> usuarioLogin) {
