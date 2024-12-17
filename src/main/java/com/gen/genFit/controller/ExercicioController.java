@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/Exercicio")
+@RequestMapping("/exercicios")
 public class ExercicioController {
 
 	@Autowired
