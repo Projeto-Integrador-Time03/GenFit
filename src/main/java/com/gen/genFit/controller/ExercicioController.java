@@ -29,28 +29,28 @@ public class ExercicioController {
 	@Autowired
 	private ExercicioRepository exercicioRepository;
 
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<Exercicio>> getAll() {
 		return ResponseEntity.ok(exercicioRepository.findAll());
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public ResponseEntity<Exercicio> getById(@PathVariable Long id) {
 		return exercicioRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
-	
+
 	@GetMapping("/exercicio/{exercicio}")
-	public ResponseEntity<List<Exercicio>> getByExercicio(@PathVariable String exercicio){
+	public ResponseEntity<List<Exercicio>> getByExercicio(@PathVariable String exercicio) {
 		return ResponseEntity.ok(exercicioRepository.findAllByExercicioContainingIgnoreCase(exercicio));
 	}
 
-	@PostMapping
+	@PostMapping("/cadastrar")
 	public ResponseEntity<Exercicio> post(@Valid @RequestBody Exercicio exercicio) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(exercicioRepository.save(exercicio));
 	}
 
-	@PutMapping
+	@PutMapping("/atualizar")
 	public ResponseEntity<Exercicio> put(@Valid @RequestBody Exercicio exercicio) {
 		return exercicioRepository.findById(exercicio.getId())
 				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(exercicioRepository.save(exercicio)))
@@ -58,7 +58,7 @@ public class ExercicioController {
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/deletar/{id}")
 	public void delete(@PathVariable Long id) {
 		Optional<Exercicio> exercicio = exercicioRepository.findById(id);
 

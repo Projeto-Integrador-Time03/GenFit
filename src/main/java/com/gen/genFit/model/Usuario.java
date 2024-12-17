@@ -47,9 +47,8 @@ public class Usuario {
 	@NotNull(message = "O Atributo Peso é Obrigatório!")
 	private float peso;
 
-	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade =
-	// CascadeType.REMOVE)
-	// @JsonIgnoreProperties("usuario")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
 	private List<Serie> serie;
 
 	/* Métodos Construtores */
