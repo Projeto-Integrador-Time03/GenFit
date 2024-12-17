@@ -47,12 +47,10 @@ public class Usuario {
 	@NotNull(message = "O Atributo Peso é Obrigatório!")
 	private float peso;
 
-	/*
-	 * @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade =
-	 * CascadeType.REMOVE)
-	 * 
-	 * @JsonIgnoreProperties("usuario") private List<Serie> serie;
-	 */
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade =
+	// CascadeType.REMOVE)
+	// @JsonIgnoreProperties("usuario")
+	private List<Serie> serie;
 
 	/* Métodos Construtores */
 
@@ -127,9 +125,12 @@ public class Usuario {
 		this.peso = peso;
 	}
 
-	/*
-	 * public List<Serie> getSerie() { return this.serie; }
-	 * 
-	 * public void setSerie(List<Serie> serie) { this.serie = serie; }
-	 */
+	public List<Serie> getSerie() {
+		return this.serie;
+	}
+
+	public void setSerie(List<Serie> serie) {
+		this.serie = serie;
+	}
+
 }
