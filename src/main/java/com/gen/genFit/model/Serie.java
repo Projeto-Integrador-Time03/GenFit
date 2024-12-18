@@ -71,4 +71,5 @@ public class Serie {
 	public void setPeriodo(String periodo) {
 		this.periodo = periodo;
 	}
+	
 }
